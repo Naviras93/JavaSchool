@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:body>
+
+        <ui:composition template="template.xhtml">
+            <ui:define name="content">
+        <h:form>
+            <!--Make it so the top row generates all of the courses-->
+            <!--And that the leftmost column generates all of the unique dates in attendance-->
+
+            <h:outputLabel value="Courses"/><br/>
+            <h:selectOneMenu value="#{dailyAttendanceBean.courseId}"
+                             valueChangeListener="#{dailyAttendanceBean.changeCurrentCourceId(c.id)}"
+                             onchange="submit()">
+                <f:selectItems value="#{dailyAttendanceBean.courses}" var="c" itemValue="#{c.id}" itemLabel="#{c.name}"/>
+            </h:selectOneMenu>
+            <br/>
+            <h:outputLabel value="Daily course attendance rate"/><br/>
+            <p:dataTable value="#{dailyAttendanceBean.getDateList()}" var="a">
+                <p:column>
+                    <h:outputText value="#{a}"/>
+                </p:column>
+               <!-- <p:column>
+                    <h:outputText value="#{dailyAttendanceBean.getDailyCourseAttendance(c.id, a)}"/>
+                </p:column>-->
+            </p:dataTable>
+        </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>

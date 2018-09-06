@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:body>
+
+        <ui:composition template="template.xhtml">
+        <ui:define name="content">
+        <h:form>
+            <h:outputLabel value="Course attendance rate"/><br/>
+            <h:dataTable value="#{adminAttendanceBean.courses}" var="c">
+                <h:column>
+                    <f:facet name="header">Course name</f:facet>
+                    <h:outputText value="#{c.name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Attendance rate</f:facet>
+                    <h:outputText value="#{adminAttendanceBean.getCourseAttendanceStatistics(c.id)}"/>
+                </h:column>
+            </h:dataTable>
+
+            <h:outputLabel value="Student attendance rate"/><br/>
+            <h:dataTable value="#{adminAttendanceBean.students}" var="s">
+                <h:column>
+                    <f:facet name="header">First name</f:facet>
+                    <h:outputText value="#{s.firstname}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Last name</f:facet>
+                    <h:outputText value="#{s.lastname}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">E-mail</f:facet>
+                    <h:outputText value="#{s.email}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Attendance Rate</f:facet>
+                    <h:outputText value="#{adminAttendanceBean.getStudentAttendanceStatistics(s.id)}"/>
+                </h:column>
+            </h:dataTable>
+
+        </h:form>
+        </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>

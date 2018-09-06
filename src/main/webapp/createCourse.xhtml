@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:body>
+        <ui:composition template="template.xhtml">
+        <ui:define name="content">
+        <h:form>
+            <div class="toprow">
+                <h:outputLabel value="Course name"/><br/>
+                <h:inputText value="#{createCourseBean.newCourseName}"/>
+            </div>
+            <div class="toprow">
+                <h:outputLabel value="Teachers"/><br/>
+                <h:selectOneMenu value="#{createCourseBean.teacherId}">
+                   <f:selectItems value="#{createCourseBean.teachers}" var="t" itemValue="#{t.id}" itemLabel="#{t.firstname} #{t.lastname}, #{t.email}"/>
+                </h:selectOneMenu>
+            </div>
+            <div class="toprow">
+                <h:commandButton value="Create course" action="#{createCourseBean.createCourse()}"/>
+            </div>
+
+            <br/>
+            <h:dataTable value="#{createCourseBean.studentsFromDb}" var="s">
+                <h:column>
+                    <f:facet name="header">First name</f:facet>
+                    <h:outputText value="#{s.firstname}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Last name</f:facet>
+                    <h:outputText value="#{s.lastname}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">E-mail</f:facet>
+                    <h:outputText value="#{s.email}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Add" action="#{createCourseBean.addStudentToCourse(s.id)}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Remove" action="#{createCourseBean.removeStudentToCourse(s.id)}"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{createCourseBean.ifStudentIsPicked(s.id)}"/>
+                </h:column>
+            </h:dataTable>
+
+        </h:form>
+        </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>
